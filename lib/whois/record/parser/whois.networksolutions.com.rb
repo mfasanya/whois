@@ -19,7 +19,10 @@ module Whois
       # @see Whois::Record::Parser::Example
       #   The Example parser for the list of all available methods.
       #
-      class WhoisNetworksolutionsCom < Base
+      class WhoisNetworksolutionsCom < BaseIcannCompliant
+        self.scanner = Scanners::BaseIcannCompliant, {
+            pattern_available: /^No match for "[\w\.]+"\.\n/
+        }
 
         property_not_supported :status
 
