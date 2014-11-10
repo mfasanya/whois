@@ -8,6 +8,7 @@
 
 
 require 'whois/record/parser/base'
+require 'whois/record/scanners/whois.networksolutions.com.rb'
 
 
 module Whois
@@ -20,6 +21,9 @@ module Whois
       #   The Example parser for the list of all available methods.
       #
       class WhoisNetworksolutionsCom < Base
+        include Scanners::Scannable
+
+        self.scanner = Scanners::WhoisNetworksolutionsCom
 
         property_not_supported :status
 

@@ -7,14 +7,14 @@
 #++
 
 
-require 'whois/record/scanners/base_whoisd'
+require 'whois/record/scanners/base'
 
 
 module Whois
   class Record
     module Scanners
 
-      class WhoisNetworksolutionsCom < BaseWhoisd
+      class WhoisNetworksolutionsCom < BaseW
 
         self.tokenizers += [
             :scan_response_throttled,
