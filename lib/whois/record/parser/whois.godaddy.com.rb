@@ -32,26 +32,6 @@ module Whois
           !available?
         end
 
-
-        property_supported :created_on do
-          if content_for_scanner =~ /Creation Date: (.+)\n/
-            Time.parse($1)
-          end
-        end
-        
-        property_supported :updated_on do
-          if content_for_scanner =~ /Updated* Date: (.+)\n/
-            Time.parse($1)
-          end
-        end
-        
-        property_supported :expires_on do
-          if content_for_scanner =~ /Expiration Date: (.+)\n/
-            Time.parse($1)
-          end
-        end
-
-
         property_supported :registrar do
           Record::Registrar.new(
               name:         content_for_scanner[/Registrar: (.+)\n/, 1],
