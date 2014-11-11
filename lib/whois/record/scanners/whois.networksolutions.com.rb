@@ -7,14 +7,14 @@
 #++
 
 
-require 'whois/record/scanners/base'
+require 'whois/record/scanners/verisign'
 
 
 module Whois
   class Record
     module Scanners
 
-      class WhoisNetworksolutionsCom < BaseW
+      class WhoisNetworksolutionsCom < Verisign
 
         self.tokenizers += [
             :scan_response_throttled,
