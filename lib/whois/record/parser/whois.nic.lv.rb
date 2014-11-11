@@ -56,9 +56,9 @@ module Whois
         property_not_supported :expires_on
         
         property_supported :registrant_contacts do
-          if content_for_scanner =~ /\[Registrar\]\n((.+\n)+)\n/
+          if content_for_scanner =~ /\[Holder\]\n((.+\n)+)\n/
             lines = $1.split("\n").map(&:strip)
-
+            
             address = nil
             fax = nil
             phone = nil
@@ -66,15 +66,15 @@ module Whois
             name = nil
 
             lines.each do |line|
-              if content_for_scanner =~ /Name:\s(.+)+/
+              if line =~ /Name:\s(.+)+/
                 name = $1
-              elsif content_for_scanner =~ /Email:\s(.+)+/
+              elsif line =~ /Email:\s(.+)+/
                 email = $1
-              elsif content_for_scanner =~ /Fax:\s(.+)+/
+              elsif line =~ /Fax:\s(.+)+/
                 fax = $1
-              elsif content_for_scanner =~ /Phone:\s(.+)+/
+              elsif line =~ /Phone:\s(.+)+/
                 phone = $1
-              elsif content_for_scanner =~ /Address:\s(.+)+/
+              elsif line =~ /Address:\s(.+)+/
                 address = $1
               end
             end
@@ -88,7 +88,6 @@ module Whois
             )
           end
         end
-
 
         property_supported :nameservers do
           content_for_scanner.scan(/Nserver:\s+(.+)\n/).flatten.map do |name|
