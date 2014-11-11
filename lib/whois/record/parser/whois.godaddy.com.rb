@@ -40,15 +40,21 @@ module Whois
         end
 
         property_supported :registrant_contacts do
-          build_contact('Registrant', Record::Contact::TYPE_REGISTRANT)
+          if content_for_scanner =~ /Registrant/
+            build_contact('Registrant', Record::Contact::TYPE_REGISTRANT)
+          end
         end
 
         property_supported :admin_contacts do
-          build_contact('Admin', Record::Contact::TYPE_ADMINISTRATIVE)
+          if content_for_scanner =~ /Admin/
+            build_contact('Admin', Record::Contact::TYPE_ADMINISTRATIVE)
+          end
         end
 
         property_supported :technical_contacts do
-          build_contact('Tech', Record::Contact::TYPE_TECHNICAL)
+          if content_for_scanner =~ /Tech/
+            build_contact('Tech', Record::Contact::TYPE_TECHNICAL)
+          end
         end
 
         property_supported :nameservers do
