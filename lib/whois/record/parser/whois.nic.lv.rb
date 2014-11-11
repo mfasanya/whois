@@ -56,23 +56,25 @@ module Whois
         property_not_supported :expires_on
         
         property_supported :registrant_contacts do
-          if content_for_scanner =~ /[Registrar]:\n((.+\n)+)\n/
+          if content_for_scanner =~ /\[Registrar\]\n((.+\n)+)\n/
             lines = $1.split("\n").map(&:strip)
-            print lines
-            address = lines[-2]
-            phone = lines[-3]
-            email = lines[-4]
-            name = lines[-5]
+            
+            address = /.*?:\s(.+)+/.match(lines[-2])[1]
+            fax = /.*?:\s(.+)+/.match(lines[-4])[1]
+            phone = /.*?:\s(.+)+/.match(lines[-3])[1]
+            email = /.*?:\s(.+)+/.match(lines[-5])[1]
+            name = /.*?:\s(.+)+/.match(lines[-6])[1]
 
             Record::Contact.new(
               :type => Record::Contact::TYPE_REGISTRANT,
               :name => name,
-              :address => address.join("\n"),
+              :address => address,
               :phone => phone,
               :email => email
             )
           end
         end
+
 
         property_supported :nameservers do
           content_for_scanner.scan(/Nserver:\s+(.+)\n/).flatten.map do |name|
