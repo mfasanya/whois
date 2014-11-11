@@ -58,12 +58,26 @@ module Whois
         property_supported :registrant_contacts do
           if content_for_scanner =~ /\[Registrar\]\n((.+\n)+)\n/
             lines = $1.split("\n").map(&:strip)
-            
-            address = /.*?:\s(.+)+/.match(lines[-2])[1]
-            fax = /.*?:\s(.+)+/.match(lines[-4])[1]
-            phone = /.*?:\s(.+)+/.match(lines[-3])[1]
-            email = /.*?:\s(.+)+/.match(lines[-5])[1]
-            name = /.*?:\s(.+)+/.match(lines[-6])[1]
+
+            address = nil
+            fax = nil
+            phone = nil
+            email = nil
+            name = nil
+
+            lines.each do |line|
+              if content_for_scanner =~ /Name:\s(.+)+/
+                name = $1
+              elsif content_for_scanner =~ /Email:\s(.+)+/
+                email = $1
+              elsif content_for_scanner =~ /Fax:\s(.+)+/
+                fax = $1
+              elsif content_for_scanner =~ /Phone:\s(.+)+/
+                phone = $1
+              elsif content_for_scanner =~ /Address:\s(.+)+/
+                address = $1
+              end
+            end
 
             Record::Contact.new(
               :type => Record::Contact::TYPE_REGISTRANT,
