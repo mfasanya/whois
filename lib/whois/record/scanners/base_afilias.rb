@@ -41,7 +41,7 @@ module Whois
 
         # .ORG
         tokenizer :scan_throttled do
-          if @input.match?(/^WHOIS LIMIT EXCEEDED/)
+          if @input.match?(/^LIMIT EXCEEDED/)
             @ast["response:throttled"] = true
             @input.skip(/^.+\n/)
           end
