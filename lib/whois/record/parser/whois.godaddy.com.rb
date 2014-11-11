@@ -32,12 +32,12 @@ module Whois
           !available?
         end
 
-        property_supported :registrar do
-          Record::Registrar.new(
-              name:         content_for_scanner[/Registrar: (.+)\n/, 1],
-              url:          content_for_scanner[/Registrar URL: (.+)\n/, 1],
-          )
-        end
+        #property_supported :registrar do
+        #  Record::Registrar.new(
+        #      name:         content_for_scanner[/Registrar: (.+)\n/, 1],
+        #      url:          content_for_scanner[/Registrar URL: (.+)\n/, 1],
+        #  )
+        #end
 
         property_supported :registrant_contacts do
           if content_for_scanner =~ /Registrant/
