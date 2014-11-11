@@ -56,8 +56,9 @@ module Whois
         property_not_supported :expires_on
         
         property_supported :registrant_contacts do
-          if content_for_scanner =~ /[Registrar]\n((.+\n)+)\n/
+          if content_for_scanner =~ /[Registrar]:\n((.+\n)+)\n/
             lines = $1.split("\n").map(&:strip)
+            print lines
             address = lines[-2]
             phone = lines[-3]
             email = lines[-4]
