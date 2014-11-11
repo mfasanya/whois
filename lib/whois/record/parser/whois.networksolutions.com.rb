@@ -8,7 +8,6 @@
 
 
 require 'whois/record/parser/base'
-require 'whois/record/scanners/whois.networksolutions.com.rb'
 
 
 module Whois
@@ -21,9 +20,6 @@ module Whois
       #   The Example parser for the list of all available methods.
       #
       class WhoisNetworksolutionsCom < Base
-        include Scanners::Scannable
-
-        self.scanner = Scanners::WhoisNetworksolutionsCom
 
         property_not_supported :status
 
@@ -36,43 +32,29 @@ module Whois
           !available?
         end
 
-
-        property_supported :created_on do
-          if content_for_scanner =~ /Creation Date: (.+)\n/
-            Time.parse($1)
-          end
-        end
-        
-        property_supported :updated_on do
-          if content_for_scanner =~ /Updated* Date: (.+)\n/
-            Time.parse($1)
-          end
-        end
-        
-        property_supported :expires_on do
-          if content_for_scanner =~ /Expiration Date: (.+)\n/
-            Time.parse($1)
-          end
-        end
-
-
-        property_supported :registrar do
-          Record::Registrar.new(
-              name:         content_for_scanner[/Registrar: (.+)\n/, 1],
-              url:          content_for_scanner[/Registrar URL: (.+)\n/, 1],
-          )
-        end
+        #property_supported :registrar do
+        #  Record::Registrar.new(
+        #      name:         content_for_scanner[/Registrar: (.+)\n/, 1],
+        #      url:          content_for_scanner[/Registrar URL: (.+)\n/, 1],
+        #  )
+        #end
 
         property_supported :registrant_contacts do
-          build_contact('Registrant', Record::Contact::TYPE_REGISTRANT)
+          if content_for_scanner =~ /Registrant/
+            build_contact('Registrant', Record::Contact::TYPE_REGISTRANT)
+          end
         end
 
         property_supported :admin_contacts do
-          build_contact('Admin', Record::Contact::TYPE_ADMINISTRATIVE)
+          if content_for_scanner =~ /Admin/
+            build_contact('Admin', Record::Contact::TYPE_ADMINISTRATIVE)
+          end
         end
 
         property_supported :technical_contacts do
-          build_contact('Tech', Record::Contact::TYPE_TECHNICAL)
+          if content_for_scanner =~ /Tech/
+            build_contact('Tech', Record::Contact::TYPE_TECHNICAL)
+          end
         end
 
         property_supported :nameservers do
