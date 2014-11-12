@@ -58,9 +58,25 @@ module Whois
         #   Address line n
         #   Contractual Language: language
         #
+
         property_supported :registrant_contacts do
-          if content_for_scanner =~ /Holder of domain name:\n(.+?)\n(.+?)\nContractual Language:.*\n\n/m
-            Record::Contact.new({ :name => $1.force_encoding('ISO-8859-1'), :address => $2.force_encoding('ISO-8859-1'), :type => Whois::Record::Contact::TYPE_REGISTRANT })
+          if content_for_scanner =~ /Holder of domain name:\n((.+\n)+)\n/
+            lines = $1.split("\n").map(&:strip)
+            
+            organization = lines[-6]
+            name = lines[-5]
+            address = lines[-4]
+            postcode = lines[-3]
+            country = lines[-2]
+
+            Record::Contact.new(
+              :type => Record::Contact::TYPE_REGISTRANT,
+              :name => name.force_encoding('ISO-8859-1'),
+              :organization => organization.force_encoding('ISO-8859-1'),
+              :address => address.force_encoding('ISO-8859-1'),
+              :zip => postcode.force_encoding('ISO-8859-1'),
+              :country => country.force_encoding('ISO-8859-1')
+            )
           end
         end
 
@@ -72,9 +88,25 @@ module Whois
         #   Address line 2
         #   Address line n
         #
-        property_supported :technical_contacts do
-          if content_for_scanner =~ /Technical contact:\n(.+?)\n(.+?)\n\n/m
-            Record::Contact.new({ :name => $1.force_encoding('ISO-8859-1'), :address => $2.force_encoding('ISO-8859-1'), :type => Whois::Record::Contact::TYPE_TECHNICAL })
+
+        property_supported :registrant_contacts do
+          if content_for_scanner =~ /Technical contact:\n((.+\n)+)\n/
+            lines = $1.split("\n").map(&:strip)
+            
+            organization = lines[-5]
+            name = lines[-4]
+            address = lines[-3]
+            postcode = lines[-2]
+            country = lines[-1]
+
+            Record::Contact.new(
+              :type => Record::Contact::TYPE_REGISTRANT,
+              :name => name.force_encoding('ISO-8859-1'),
+              :organization => organization.force_encoding('ISO-8859-1'),
+              :address => address.force_encoding('ISO-8859-1'),
+              :zip => postcode.force_encoding('ISO-8859-1'),
+              :country => country.force_encoding('ISO-8859-1')
+            )
           end
         end
 
