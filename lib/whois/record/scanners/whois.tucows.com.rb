@@ -21,11 +21,19 @@ module Whois
             :skip_empty_line,
             :scan_disclaimer,
             :scan_keyvalue,
+            :scan_throttled
         ]
 
         tokenizer :scan_disclaimer do
           @input.skip_until(/The Data in the Tucows Registrar/m)
           @ast["field:disclaimer"] = 'The Data in the Tucows Registrar' << @input.scan_until(/.*$/m)
+        end
+
+        tokenizer :scan_throttled do
+          if @input.match?(/^Maximum Daily connection limit reached/)
+            @ast["response:throttled"] = true
+            @input.skip(/^.+\n/)
+          end
         end
 
       end
