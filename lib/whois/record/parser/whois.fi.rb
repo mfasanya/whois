@@ -85,12 +85,12 @@ module Whois
 
             Record::Contact.new(
               type:         Record::Contact::TYPE_REGISTRANT,
-              id:           array[1],
-              name:         address[0],
-              organization: array[0],
-              address:      address[1],
-              zip:          address[2],
-              city:         address[3],
+              id:           array[1].force_encoding('ISO-8859-1'),
+              name:         address[0].force_encoding('ISO-8859-1'),
+              organization: array[0].force_encoding('ISO-8859-1'),
+              address:      address[1].force_encoding('ISO-8859-1'),
+              zip:          address[2].force_encoding('ISO-8859-1'),
+              city:         address[3].force_encoding('ISO-8859-1'),
               phone:        node("phone")
             )
           end
