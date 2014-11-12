@@ -41,6 +41,9 @@ module Whois
           !available?
         end
 
+        property_supported :registrant_contacts do
+          build_contact(Record::Contact::TYPE_REGISTRANT)
+        end
 
         property_supported :created_on do
           if content_for_scanner =~ /Created:\s+(.*)\n/
@@ -55,6 +58,32 @@ module Whois
         end
 
         property_not_supported :expires_on
+
+        private
+
+        def build_contact(type)
+          Record::Contact.new(
+              type:         type,
+              id:           nil,
+              name:         value_for_property('Name.......................'),
+              address:      value_for_property('Post Address...............'),
+              city:         value_for_property('Postal Area................'),
+              zip:          value_for_property('Postal Code................'),
+              country_code: value_for_property('Country....................'),
+              phone:        value_for_property('Phone Number...............'),
+              email:        value_for_property('Email Address..............')
+          )
+        end
+
+        def value_for_property(property)
+          matches = content_for_scanner.scan(/#{property}:\s(.+)\n/)
+          value = matches.collect(&:first).join(', ')
+          if value == ""
+            nil
+          else
+            value
+          end
+        end
 
       end
 
