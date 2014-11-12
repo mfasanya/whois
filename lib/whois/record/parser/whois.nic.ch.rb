@@ -60,7 +60,7 @@ module Whois
         #
         property_supported :registrant_contacts do
           if content_for_scanner =~ /Holder of domain name:\n(.+?)\n(.+?)\nContractual Language:.*\n\n/m
-            Record::Contact.new({ :name => $1, :address => $2, :type => Whois::Record::Contact::TYPE_REGISTRANT })
+            Record::Contact.new({ :name => $1.force_encoding('ISO-8859-1'), :address => $2.force_encoding('ISO-8859-1'), :type => Whois::Record::Contact::TYPE_REGISTRANT })
           end
         end
 
@@ -74,7 +74,7 @@ module Whois
         #
         property_supported :technical_contacts do
           if content_for_scanner =~ /Technical contact:\n(.+?)\n(.+?)\n\n/m
-            Record::Contact.new({ :name => $1, :address => $2, :type => Whois::Record::Contact::TYPE_TECHNICAL })
+            Record::Contact.new({ :name => $1.force_encoding('ISO-8859-1'), :address => $2.force_encoding('ISO-8859-1'), :type => Whois::Record::Contact::TYPE_TECHNICAL })
           end
         end
 
