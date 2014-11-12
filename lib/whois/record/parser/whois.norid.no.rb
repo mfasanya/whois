@@ -81,7 +81,7 @@ module Whois
           if value == ""
             nil
           else
-            value
+            value.force_encoding('ISO-8859-1')
           end
         end
 
