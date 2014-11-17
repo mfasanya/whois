@@ -92,10 +92,10 @@ module Whois
           if @input.scan(/([^  \[]*):(.*)\n/)
             key, value = @input[1].strip, @input[2].strip
             if store[key].nil?
-              store[key] = value
+              store[key] = value.force_encoding('ISO-8859-1')
             else
               store[key].is_a?(Array) || store[key] = [store[key]]
-              store[key] << value
+              store[key] << value.force_encoding('ISO-8859-1')
             end
             store
           end
