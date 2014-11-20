@@ -56,7 +56,7 @@ module Whois
             Record::Contact.new(
               :type => Record::Contact::TYPE_REGISTRANT,
               :name => content_for_scanner[/^Registrant Contact:\n\s+(.+?)\n/, 1],
-              :address => address.join("\n"),
+              :address => address,
               :city => city.strip,
               :email => email.strip,
               :phone => phone.strip,
