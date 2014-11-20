@@ -41,6 +41,31 @@ module Whois
           !available?
         end
 
+        property_supported :registrant_contacts do
+          if content_for_scanner =~ /^Registrant Address:\n\s+((.+\n)+)\n/
+            lines = $1.split("\n").map(&:strip)
+            address = lines[-7]
+            city    = lines[-6]
+            zip     = lines[-5]
+            country = lines[-4]
+            email = lines[-1]
+            fax = lines[-2]
+            phone = lines[-3]
+
+            
+            Record::Contact.new(
+              :type => Record::Contact::TYPE_REGISTRANT,
+              :name => content_for_scanner[/^Registrant Contact:\n\s+(.+?)\n/, 1],
+              :address => address.join("\n"),
+              :city => city.strip,
+              :email => email.strip,
+              :phone => phone.strip,
+              :fax => fax.strip,
+              :zip => zip,
+              :country => country
+            )
+          end
+        end
 
         property_supported :created_on do
           if content_for_scanner =~ /^Entry created:\n\s+(.+?)\n/
