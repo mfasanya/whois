@@ -126,7 +126,7 @@ module Whois
             organization = values["contact"].force_encoding('UTF-8')
             address = values["address"].join("\n").force_encoding('UTF-8')
           else
-            name = values["contact"]
+            name = values["contact"].force_encoding('UTF-8')
             if values["address"].nil?
               organization = nil
               address      = nil
