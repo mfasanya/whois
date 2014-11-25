@@ -144,14 +144,14 @@ module Whois
           Record::Contact.new({
             :type         => type,
             :id           => id,
-            :name         => name,
-            :organization => organization,
-            :address      => address,
-            :country_code => values["country"],
-            :phone        => values["phone"],
-            :fax          => values["fax-no"],
-            :email        => values["e-mail"],
-            :updated_on   => updated_on,
+            :name         => name.force_encoding('UTF-8'),
+            :organization => organization.force_encoding('UTF-8'),
+            :address      => address.force_encoding('UTF-8'),
+            :country_code => values["country"].force_encoding('UTF-8'),
+            :phone        => values["phone"].force_encoding('UTF-8'),
+            :fax          => values["fax-no"].force_encoding('UTF-8'),
+            :email        => values["e-mail"].force_encoding('UTF-8'),
+            :updated_on   => updated_on.force_encoding('UTF-8'),
           })
         end
 
