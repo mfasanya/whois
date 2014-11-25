@@ -123,19 +123,19 @@ module Whois
 
           if values["type"] == "ORGANIZATION"
             name = nil
-            organization = values["contact"]
-            address = values["address"].join("\n")
+            organization = values["contact"].force_encoding('UTF-8')
+            address = values["address"].force_encoding('UTF-8').join("\n")
           else
             name = values["contact"]
             if values["address"].nil?
               organization = nil
               address      = nil
             elsif values["address"].size > 2
-              organization = values["address"][0]
-              address      = values["address"][1..-1].join("\n")
+              organization = values["address"][0].force_encoding('UTF-8')
+              address      = values["address"][1..-1].force_encoding('UTF-8').join("\n")
             else
               organization = nil
-              address      = values["address"].join("\n")
+              address      = values["address"].force_encoding('UTF-8').join("\n")
             end
           end
 
@@ -144,14 +144,14 @@ module Whois
           Record::Contact.new({
             :type         => type,
             :id           => id,
-            :name         => name.force_encoding('UTF-8'),
-            :organization => organization.force_encoding('UTF-8'),
-            :address      => address.force_encoding('UTF-8'),
-            :country_code => values["country"].force_encoding('UTF-8'),
-            :phone        => values["phone"].force_encoding('UTF-8'),
-            :fax          => values["fax-no"].force_encoding('UTF-8'),
-            :email        => values["e-mail"].force_encoding('UTF-8'),
-            :updated_on   => updated_on.force_encoding('UTF-8'),
+            :name         => name,
+            :organization => organization,
+            :address      => address,
+            :country_code => values["country"],
+            :phone        => values["phone"],
+            :fax          => values["fax-no"],
+            :email        => values["e-mail"],
+            :updated_on   => updated_on,
           })
         end
 
