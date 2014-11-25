@@ -124,7 +124,7 @@ module Whois
           if values["type"] == "ORGANIZATION"
             name = nil
             organization = values["contact"].force_encoding('UTF-8')
-            address = values["address"].join("\n")].force_encoding('UTF-8')
+            address = values["address"].join("\n").force_encoding('UTF-8')
           else
             name = values["contact"]
             if values["address"].nil?
