@@ -124,7 +124,7 @@ module Whois
           if values["type"] == "ORGANIZATION"
             name = nil
             organization = values["contact"].force_encoding('UTF-8')
-            address = values["address"].force_encoding('UTF-8').join("\n")
+            address = values["address"].join("\n")].force_encoding('UTF-8')
           else
             name = values["contact"]
             if values["address"].nil?
@@ -132,10 +132,10 @@ module Whois
               address      = nil
             elsif values["address"].size > 2
               organization = values["address"][0].force_encoding('UTF-8')
-              address      = values["address"][1..-1].force_encoding('UTF-8').join("\n")
+              address      = values["address"][1..-1].join("\n").force_encoding('UTF-8')
             else
               organization = nil
-              address      = values["address"].force_encoding('UTF-8').join("\n")
+              address      = values["address"].join("\n").force_encoding('UTF-8')
             end
           end
 
