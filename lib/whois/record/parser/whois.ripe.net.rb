@@ -50,6 +50,52 @@ module Whois
 
         property_not_supported :expires_on
 
+        property_supported :registrant_contacts do
+          if content_for_scanner =~ /address: (.+?)\naddress: (.+?)\naddress: (.+?)\n/
+              email = nil
+              phone = nil
+              fax = nil
+              name = nil
+              name = $1
+              address = $2
+              country = $3
+
+              if content_for_scanner =~ /abuse-mailbox: (.+?)\n/
+                email = $1.strip
+              end
+
+              if content_for_scanner =~ /phone: (.+?)\n/
+                phone = $1.strip
+              end
+
+              if content_for_scanner =~ /fax-no: (.+?)\n/
+                fax = $1.strip
+              end
+
+              if content_for_scanner =~ /person: (.+?)\n/
+                name = $1.strip
+              end
+
+              Record::Contact.new(
+                type:         Record::Contact::TYPE_REGISTRANT,
+                id:           nil,
+                name:         name.strip,
+                address:      address.strip,
+                country:      country.strip,
+                email:        email,
+                phone:        phone,
+                fax:          fax, 
+              )
+          end
+        end
+
+        property_supported :registrar do
+          Record::Registrar.new(
+              organization:  content_for_scanner[/netname: (.+)\n/, 1].strip,
+              name:          content_for_scanner[/descr: (.+)\n/, 1].strip,
+          )
+        end
+
 
         # Nameservers are listed in the following formats:
         #
