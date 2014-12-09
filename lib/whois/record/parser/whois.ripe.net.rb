@@ -56,11 +56,16 @@ module Whois
               phone = nil
               fax = nil
               name = nil
+              organization = nil
               name = $1
               address = $2
               country = $3
 
               if content_for_scanner =~ /abuse-mailbox: (.+?)\n/
+                email = $1.strip
+              end
+
+              if content_for_scanner =~ /e-mail: (.+?)\n/
                 email = $1.strip
               end
 
@@ -76,9 +81,14 @@ module Whois
                 name = $1.strip
               end
 
+              if content_for_scanner =~ /descr: (.+?)\n/
+                organization = $1.strip
+              end
+
               Record::Contact.new(
                 type:         Record::Contact::TYPE_REGISTRANT,
                 id:           nil,
+                organization: organization
                 name:         name.strip,
                 address:      address.strip,
                 country:      country.strip,
