@@ -88,7 +88,7 @@ module Whois
               Record::Contact.new(
                 type:         Record::Contact::TYPE_REGISTRANT,
                 id:           nil,
-                organization: organization
+                organization: organization,
                 name:         name.strip,
                 address:      address.strip,
                 country:      country.strip,
