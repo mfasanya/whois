@@ -52,15 +52,30 @@ module Whois
             fax = lines[-2]
             phone = lines[-3]
 
+            if city
+              city = city.strip
+            end
+
+            if email
+              email = email.strip
+            end
+
+            if phone
+              phone = phone.strip
+            end
+
+            if fax
+              fax = fax.strip
+            end
             
             Record::Contact.new(
               :type => Record::Contact::TYPE_REGISTRANT,
               :name => content_for_scanner[/^Registrant Contact:\n\s+(.+?)\n/, 1],
               :address => address,
-              :city => city.strip,
-              :email => email.strip,
-              :phone => phone.strip,
-              :fax => fax.strip,
+              :city => city,
+              :email => email,
+              :phone => phone,
+              :fax => fax,
               :zip => zip,
               :country => country
             )
