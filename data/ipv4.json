@@ -52,19 +52,19 @@
     "host": "whois.ripe.net"
   },
   "59.0.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "58.0.0.0/7": {
     "host": "whois.apnic.net"
   },
   "61.72.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "61.80.0.0/14": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "61.84.0.0/15": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "61.112.0.0/12": {
     "host": "whois.arin.net",
@@ -115,28 +115,28 @@
     "host": "whois.apnic.net"
   },
   "112.160.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "115.0.0.0/12": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "115.16.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "118.32.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "119.192.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "112.0.0.0/5": {
     "host": "whois.apnic.net"
   },
   "121.128.0.0/10": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "125.128.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "120.0.0.0/6": {
     "host": "whois.apnic.net"
@@ -152,9 +152,8 @@
     "adapter": "arin"
   },
   "133.0.0.0/8": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "139.20.0.0/14": {
     "host": "whois.ripe.net"
@@ -209,7 +208,7 @@
     "host": "whois.ripe.net"
   },
   "150.183.0.0/16": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "150.254.0.0/16": {
     "host": "whois.ripe.net"
@@ -230,9 +229,8 @@
     "host": "whois.ripe.net"
   },
   "153.128.0.0/9": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "153.0.0.0/8": {
     "host": "whois.apnic.net"
@@ -328,7 +326,7 @@
     "host": "whois.apnic.net"
   },
   "175.192.0.0/10": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "175.0.0.0/8": {
     "host": "whois.apnic.net"
@@ -352,7 +350,7 @@
     "host": "whois.lacnic.net"
   },
   "183.96.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "182.0.0.0/7": {
     "host": "whois.apnic.net"
@@ -444,9 +442,8 @@
     "host": "whois.lacnic.net"
   },
   "202.11.0.0/16": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "202.13.0.0/16": {
     "host": "whois.arin.net",
@@ -461,7 +458,7 @@
     "adapter": "arin"
   },
   "202.20.128.0/17": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "202.23.0.0/16": {
     "host": "whois.arin.net",
@@ -476,7 +473,7 @@
     "adapter": "arin"
   },
   "202.30.0.0/15": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "202.32.0.0/14": {
     "host": "whois.arin.net",
@@ -494,9 +491,8 @@
     "adapter": "arin"
   },
   "202.224.0.0/11": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "203.0.0.0/10": {
     "host": "whois.apnic.net"
@@ -527,7 +523,7 @@
     "adapter": "arin"
   },
   "203.224.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "202.0.0.0/7": {
     "host": "whois.apnic.net"
@@ -562,13 +558,13 @@
     "host": "whois.twnic.net"
   },
   "210.90.0.0/15": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "210.92.0.0/14": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "210.96.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "210.128.0.0/11": {
     "host": "whois.arin.net",
@@ -579,10 +575,10 @@
     "adapter": "arin"
   },
   "210.178.0.0/15": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "210.180.0.0/14": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "210.188.0.0/14": {
     "host": "whois.arin.net",
@@ -593,10 +589,10 @@
     "adapter": "arin"
   },
   "210.204.0.0/14": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "210.216.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "210.224.0.0/12": {
     "host": "whois.arin.net",
@@ -633,7 +629,7 @@
     "host": "whois.twnic.net"
   },
   "211.32.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "211.75.0.0/16": {
     "host": "whois.twnic.net"
@@ -642,10 +638,10 @@
     "host": "whois.twnic.net"
   },
   "211.104.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "211.112.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "211.120.0.0/13": {
     "host": "whois.arin.net",
@@ -656,13 +652,13 @@
     "adapter": "arin"
   },
   "211.168.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "211.176.0.0/12": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "211.192.0.0/10": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "210.0.0.0/7": {
     "host": "whois.apnic.net"
@@ -688,22 +684,21 @@
     "host": "whois.ripe.net"
   },
   "218.36.0.0/14": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "218.40.0.0/13": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "218.48.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "219.96.0.0/11": {
     "host": "whois.arin.net",
     "adapter": "arin"
   },
   "218.144.0.0/12": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "218.160.0.0/12": {
     "host": "whois.twnic.net"
@@ -717,57 +712,57 @@
     "adapter": "arin"
   },
   "218.232.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "219.240.0.0/15": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "219.248.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "218.0.0.0/7": {
     "host": "whois.apnic.net"
   },
   "220.64.0.0/11": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "220.96.0.0/14": {
     "host": "whois.arin.net",
     "adapter": "arin"
   },
   "220.103.0.0/16": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "220.104.0.0/13": {
     "host": "whois.arin.net",
     "adapter": "arin"
   },
   "220.149.0.0/16": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "221.138.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "221.144.0.0/12": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "221.160.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "222.96.0.0/12": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "222.112.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "222.120.0.0/15": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "222.122.0.0/16": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "222.232.0.0/13": {
-    "host": "whois.nic.or.kr"
+    "host": "whois.apnic.net"
   },
   "220.0.0.0/6": {
     "host": "whois.apnic.net"
