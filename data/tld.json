@@ -1087,8 +1087,7 @@
     "adapter": "none"
   },
   ".nhs.uk": {
-    "host": "whois.nic.uk",
-    "adapter": "none"
+    "host": "whois.nic.uk"
   },
   ".nls.uk": {
     "host": null,
