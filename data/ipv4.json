@@ -39,9 +39,8 @@
     "host": "whois.apnic.net"
   },
   "43.0.0.0/8": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "46.0.0.0/8": {
     "host": "whois.ripe.net"
@@ -68,19 +67,16 @@
     "host": "whois.nic.or.kr"
   },
   "61.112.0.0/12": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "61.192.0.0/12": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "61.208.0.0/13": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "60.0.0.0/7": {
     "host": "whois.apnic.net"
@@ -762,17 +758,15 @@
     "host": "whois.nic.or.kr"
   },
   "220.96.0.0/14": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "220.103.0.0/16": {
     "host": "whois.nic.or.kr"
   },
   "220.104.0.0/13": {
-    "host": "whois.nic.ad.jp",
-    "adapter": "formatted",
-    "format": "%s/e"
+    "host": "whois.arin.net",
+    "adapter": "arin"
   },
   "220.149.0.0/16": {
     "host": "whois.nic.or.kr"
