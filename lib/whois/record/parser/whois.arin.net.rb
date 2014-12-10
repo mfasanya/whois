@@ -44,13 +44,6 @@ module Whois
           end
         end
 
-        #property_supported :registrar do
-        #  Record::Registrar.new(
-        #      name:         content_for_scanner[/Registrar: (.+)\n/, 1],
-        #      url:          content_for_scanner[/Registrar URL: (.+)\n/, 1],
-        #  )
-        #end
-
         property_supported :registrant_contacts do
             Record::Contact.new(
               type:         Record::Contact::TYPE_REGISTRANT,
