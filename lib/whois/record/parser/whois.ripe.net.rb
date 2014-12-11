@@ -77,6 +77,10 @@ module Whois
                 elsif count == 1
                   city = line.strip
                 end
+              elsif arr.length == 1
+                if count == 0
+                  address = lin.strip
+                end
               elsif arr.length == 3
                 if count == 0
                   name = line.strip
@@ -159,6 +163,10 @@ module Whois
                   address = line.strip
                 elsif count == 1
                   city = line.strip
+                end
+              elsif arr.length == 1
+                if count == 0
+                  address = lin.strip
                 end
               elsif arr.length == 3
                 if count == 0
