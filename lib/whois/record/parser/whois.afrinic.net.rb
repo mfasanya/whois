@@ -51,51 +51,146 @@ module Whois
         property_not_supported :expires_on
 
         property_supported :registrant_contacts do
-          if content_for_scanner =~ /address: (.+?)\naddress: (.+?)\naddress: (.+?)\n/
-              email = nil
-              phone = nil
-              fax = nil
-              name = nil
-              organization = nil
-              name = $1
-              address = $2
-              country = $3
+          select = content_for_scanner.scan(/\n\n((.|\n)*?)source:/)
 
-              if content_for_scanner =~ /abuse-mailbox: (.+?)\n/
-                email = $1.strip
+          email = nil
+          phone = nil
+          fax = nil
+          name = nil
+          organization = nil
+          name = nil
+          address = nil
+          country = nil
+          country_code = nil
+
+          if select[1]
+            count = 0
+            data = select[1][0]
+            
+            data.scan(/address: (.+?)\n/).flatten.map do |line|
+              if count == 0
+                name = line.strip
+              elsif count == 1
+                address = line.strip
+              elsif count == 2
+                country = line.strip
               end
+              count += 1
+            end
 
-              if content_for_scanner =~ /e-mail: (.+?)\n/
-                email = $1.strip
+            if data =~ /abuse-mailbox: (.+?)\n/
+              email = $1.strip
+            end
+
+            if data =~ /e-mail: (.+?)\n/
+              email = $1.strip
+            end
+
+            if data =~ /phone: (.+?)\n/
+              phone = $1.strip
+            end
+
+            if data =~ /fax-no: (.+?)\n/
+              fax = $1.strip
+            end
+
+            if data =~ /person: (.+?)\n/
+              name = $1.strip
+            end
+
+            if data =~ /country: (.+?)\n/
+              country_code = $1.strip
+            end
+
+            if content_for_scanner =~ /descr: (.+?)\n/
+              organization = $1.strip
+            end
+
+            Record::Contact.new(
+              type:         Record::Contact::TYPE_ADMINISTRATIVE,
+              id:           nil,
+              organization: organization,
+              name:         name,
+              address:      address,
+              country:      country,
+              country_code: country_code,
+              email:        email,
+              phone:        phone,
+              fax:          fax, 
+            )
+          end
+        end
+
+        property_supported :technical_contacts do
+          select = content_for_scanner.scan(/\n\n((.|\n)*?)source:/)
+
+          email = nil
+          phone = nil
+          fax = nil
+          name = nil
+          organization = nil
+          name = nil
+          address = nil
+          country = nil
+          country_code = nil
+
+          print select
+
+          if select[2]
+            count = 0
+            data = select[2][0]
+
+            data.scan(/address: (.+?)\n/).flatten.map do |line|
+              if count == 1
+                name = line.strip
+              elsif count == 2
+                address = line.strip
+              elsif count == 3
+                country = line.strip
               end
+              count += 1
+            end
 
-              if content_for_scanner =~ /phone: (.+?)\n/
-                phone = $1.strip
-              end
+            if data =~ /abuse-mailbox: (.+?)\n/
+              email = $1.strip
+            end
 
-              if content_for_scanner =~ /fax-no: (.+?)\n/
-                fax = $1.strip
-              end
+            if data =~ /e-mail: (.+?)\n/
+              email = $1.strip
+            end
 
-              if content_for_scanner =~ /person: (.+?)\n/
-                name = $1.strip
-              end
+            if data =~ /phone: (.+?)\n/
+              phone = $1.strip
+            end
 
-              if content_for_scanner =~ /descr: (.+?)\n/
-                organization = $1.strip
-              end
+            if data =~ /fax-no: (.+?)\n/
+              fax = $1.strip
+            end
 
-              Record::Contact.new(
-                type:         Record::Contact::TYPE_REGISTRANT,
-                id:           nil,
-                organization: organization,
-                name:         name.strip,
-                address:      address.strip,
-                country:      country.strip,
-                email:        email,
-                phone:        phone,
-                fax:          fax, 
-              )
+            if data =~ /person: (.+?)\n/
+              name = $1.strip
+            end
+
+            if data =~ /country: (.+?)\n/
+              country_code = $1.strip
+            end
+
+            if content_for_scanner =~ /descr: (.+?)\n/
+              organization = $1.strip
+            end
+
+            Record::Contact.new(
+              type:         Record::Contact::TYPE_TECHNICAL,
+              id:           nil,
+              organization: organization,
+              name:         name,
+              address:      address,
+              country:      country,
+              country_code: country_code,
+              email:        email,
+              phone:        phone,
+              fax:          fax, 
+            )
           end
         end
 
