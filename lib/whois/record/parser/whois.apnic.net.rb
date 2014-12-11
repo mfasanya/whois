@@ -118,7 +118,7 @@ module Whois
             end
 
             Record::Contact.new(
-              type:         Record::Contact::TYPE_TECHNICAL,
+              type:         Record::Contact::TYPE_REGISTRANT,
               id:           nil,
               organization: organization,
               name:         name,
