@@ -236,6 +236,10 @@ module Whois
           end
         end
 
+        def response_throttled?
+          !content_for_scanner.match(/Query rate limit exceeded/).nil?
+        end
+
       end
 
     end
