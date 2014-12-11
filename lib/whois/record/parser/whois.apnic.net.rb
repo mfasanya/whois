@@ -79,7 +79,7 @@ module Whois
                 end
               elsif arr.length == 1
                 if count == 0
-                  address = lin.strip
+                  address = line.strip
                 end
               elsif arr.length == 3
                 if count == 0
@@ -166,7 +166,7 @@ module Whois
                 end
               elsif arr.length == 1
                 if count == 0
-                  address = lin.strip
+                  address = line.strip
                 end
               elsif arr.length == 3
                 if count == 0
