@@ -63,6 +63,7 @@ module Whois
           country = nil
           country_code = nil
           city = nil
+          zip = nil
 
           if select[1]
             count = 0
@@ -70,7 +71,7 @@ module Whois
             
             arr = data.scan(/address: (.+?)\n/)
 
-            arr.flatten.map do |line|
+           arr.flatten.map do |line|
               if arr.length == 2
                 if count == 0
                   address = line.strip
@@ -96,6 +97,18 @@ module Whois
                   address = line.strip
                 elsif count == 2
                   city = line.strip
+                elsif count == 3
+                  country = line.strip
+                end
+              elsif arr.length == 5
+                if count == 0
+                  name = line.strip
+                elsif count == 1
+                  address = line.strip
+                elsif count == 2
+                  city = line.strip
+                elsif count == 3
+                  zip = line.strip
                 elsif count == 4
                   country = line.strip
                 end
@@ -142,7 +155,8 @@ module Whois
               email:        email,
               phone:        phone,
               city:         city,
-              fax:          fax, 
+              fax:          fax,
+              zip:          zip 
             )
           end
         end
@@ -160,6 +174,7 @@ module Whois
           country = nil
           country_code = nil
           city = nil
+          zip = nil
 
           if select[2]
             count = 0
@@ -193,6 +208,18 @@ module Whois
                   address = line.strip
                 elsif count == 2
                   city = line.strip
+                elsif count == 3
+                  country = line.strip
+                end
+              elsif arr.length == 5
+                if count == 0
+                  name = line.strip
+                elsif count == 1
+                  address = line.strip
+                elsif count == 2
+                  city = line.strip
+                elsif count == 3
+                  zip = line.strip
                 elsif count == 4
                   country = line.strip
                 end
@@ -240,6 +267,7 @@ module Whois
               phone:        phone,
               city:         city,
               fax:          fax, 
+              zip:          zip
             )
           end
         end
