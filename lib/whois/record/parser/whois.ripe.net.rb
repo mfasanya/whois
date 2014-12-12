@@ -255,7 +255,7 @@ module Whois
         end
 
         def response_throttled?
-          !content_for_scanner.match(/Query rate limit exceeded/).nil?
+          !content_for_scanner.match(/ERROR:201: access denied/).nil?
         end
 
       end
