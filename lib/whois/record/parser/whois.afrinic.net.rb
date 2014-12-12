@@ -221,9 +221,19 @@ module Whois
         end
 
         property_supported :registrar do
+          org = content_for_scanner[/netname: (.+)\n/, 1]
+          if org
+            org = org.strip
+          end
+
+          name = content_for_scanner[/descr: (.+)\n/, 1]
+          if name 
+            name = name.strip
+          end
+
           Record::Registrar.new(
-              organization:  content_for_scanner[/netname: (.+)\n/, 1].strip,
-              name:          content_for_scanner[/descr: (.+)\n/, 1].strip,
+              organization:  org,
+              name:          name,
           )
         end
 
