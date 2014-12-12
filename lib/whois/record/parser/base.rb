@@ -353,7 +353,7 @@ module Whois
         protected
 
         def content_for_scanner
-          @content_for_scanner ||= content.to_s.gsub(/\r\n/, "\n")
+          @content_for_scanner ||= content.to_s.gsub(/\r\n/, "\n").force_encoding("ISO-8859-1").encode("UTF-8")
         end
 
         def cached_properties_fetch(key)
