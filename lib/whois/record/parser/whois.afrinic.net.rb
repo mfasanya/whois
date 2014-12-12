@@ -77,12 +77,26 @@ module Whois
                 elsif count == 1
                   city = line.strip
                 end
+              elsif arr.length == 1
+                if count == 0
+                  address = line.strip
+                end
               elsif arr.length == 3
                 if count == 0
                   name = line.strip
                 elsif count == 1
                   address = line.strip
                 elsif count == 2
+                  country = line.strip
+                end
+              elsif arr.length == 4
+                if count == 0
+                  name = line.strip
+                elsif count == 1
+                  address = line.strip
+                elsif count == 2
+                  city = line.strip
+                elsif count == 4
                   country = line.strip
                 end
               end
@@ -170,6 +184,16 @@ module Whois
                 elsif count == 1
                   address = line.strip
                 elsif count == 2
+                  country = line.strip
+                end
+              elsif arr.length == 4
+                if count == 0
+                  name = line.strip
+                elsif count == 1
+                  address = line.strip
+                elsif count == 2
+                  city = line.strip
+                elsif count == 4
                   country = line.strip
                 end
               end
