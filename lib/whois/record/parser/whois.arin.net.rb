@@ -80,7 +80,7 @@ module Whois
 
         def value_for_property(property)
           matches = content_for_scanner.scan(/#{property}: (.+?)\n/)
-          value = matches.collect(&:first).join(', ')
+          value = matches.collect(&:first)[0]
           if value == ""
             nil
           else
