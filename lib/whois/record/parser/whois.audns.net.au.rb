@@ -92,6 +92,9 @@ module Whois
           end
         end
 
+        def response_throttled?
+          !content_for_scanner.match(/BLACKLISTED/).nil?
+        end
 
       private
 
