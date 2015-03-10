@@ -23,14 +23,12 @@ module Whois
       # @see Whois::Record::Parser::Example
       #   The Example parser for the list of all available methods.
       #
-      class WhoisArnesSi < Base
+      class WhoisRegisterSi < Base
 
         property_supported :status do
           if content_for_scanner =~ /status:\s+(.+)\n/
-            statuses = $1.strip.downcase.split(",")
-            if statuses.include?("ok")
-              :registered
-            elsif statuses.include?("serverupdateprohibited")
+            statuses = $1.downcase.split(",").map(&:strip)
+            if statuses.include?("server_update_prohibited")
               :registered
             else
               Whois.bug!(ParserError, "Unknown status `#{$1}'.")
