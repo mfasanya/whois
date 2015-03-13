@@ -44,6 +44,18 @@ module Whois
             build_contact('Registrant', Record::Contact::TYPE_REGISTRANT)
           end
         end
+
+        property_supported :admin_contacts do
+          if content_for_scanner =~ /Admin/
+            build_contact('Admin', Record::Contact::TYPE_ADMINISTRATIVE)
+          end
+        end
+
+        property_supported :technical_contacts do
+          if content_for_scanner =~ /Tech/
+            build_contact('Tech', Record::Contact::TYPE_TECHNICAL)
+          end
+        end
         
         property_supported :nameservers do
           content_for_scanner.scan(/Name Server: (.+)\n/).map do |line|
