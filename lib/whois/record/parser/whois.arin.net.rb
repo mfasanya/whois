@@ -25,66 +25,70 @@ module Whois
 
         # The server is contacted only in case of a registered domain.
         property_supported :available? do
-          !!(content_for_scanner =~ /No match found for/)
+          false
         end
 
         property_supported :registered? do
           !available?
         end
 
-        property_supported :created_on do
-          if content_for_scanner =~ /RegDate: (.+?)\n/
-            Time.parse($1)
-          end
-        end
-
-        property_supported :updated_on do
-          if content_for_scanner =~ /Updated: (.+?)\n/
-            Time.parse($1)
-          end
-        end
+        #property_supported :registrar do
+        #  Record::Registrar.new(
+        #      name:         content_for_scanner[/Registrar: (.+)\n/, 1],
+        #      url:          content_for_scanner[/Registrar URL: (.+)\n/, 1],
+        #  )
+        #end
 
         property_supported :registrant_contacts do
-            Record::Contact.new(
-              type:         Record::Contact::TYPE_REGISTRANT,
-              id:           value_for_property('OrgId'),
-              name:         nil,
-              organization: value_for_property('OrgName'),
-              address:      value_for_property('Address'),
-              city:         value_for_property('City'),
-              zip:          value_for_property('PostalCode'),
-              state:        value_for_property('StateProv'),
-              country_code: value_for_property('Country')
-            )
+          if content_for_scanner =~ /Registrant/
+            build_contact('Registrant', Record::Contact::TYPE_REGISTRANT)
+          end
         end
 
         property_supported :admin_contacts do
-          Record::Contact.new(
-              type:         Record::Contact::TYPE_ADMINISTRATIVE,
-              name:         value_for_property('OrgTechName'),
-              phone:        value_for_property('OrgTechPhone'),
-              email:        value_for_property('OrgTechEmail'), 
-          )
+          if content_for_scanner =~ /Admin/
+            build_contact('Admin', Record::Contact::TYPE_ADMINISTRATIVE)
+          end
         end
 
         property_supported :technical_contacts do
-           Record::Contact.new(
-              type:         Record::Contact::TYPE_TECHNICAL,
-              name:         value_for_property('OrgAbuseName'),
-              phone:        value_for_property('OrgAbusePhone'),
-              email:        value_for_property('OrgAbuseEmail'), 
-            )
+          if content_for_scanner =~ /Tech/
+            build_contact('Tech', Record::Contact::TYPE_TECHNICAL)
+          end
+        end
+
+        property_supported :nameservers do
+          content_for_scanner.scan(/Name Server: (.+)\n/).map do |line|
+            Record::Nameserver.new(name: line[0].strip)
+          end
         end
 
       private
 
-        def value_for_property(property)
-          matches = content_for_scanner.scan(/#{property}: (.+?)\n/)
-          value = matches.collect(&:first)[0]
+        def build_contact(element, type)
+          Record::Contact.new(
+              type:         type,
+              id:           nil,
+              name:         value_for_property(element, 'Name'),
+              organization: value_for_property(element, 'Organization'),
+              address:      value_for_property(element, 'Street'),
+              city:         value_for_property(element, 'City'),
+              zip:          value_for_property(element, 'Postal Code'),
+              state:        value_for_property(element, 'State/Province'),
+              country:      value_for_property(element, 'Country'),
+              phone:        value_for_property(element, 'Phone'),
+              fax:          value_for_property(element, 'Fax'),
+              email:        value_for_property(element, 'Email')
+          )
+        end
+
+        def value_for_property(element, property)
+          matches = content_for_scanner.scan(/#{element} #{property}:\s(.+)\n/)
+          value = matches.collect(&:first).join(', ')
           if value == ""
             nil
           else
-            value.strip
+            value
           end
         end
 
