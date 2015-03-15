@@ -62,20 +62,20 @@ module Whois
         property_supported :registrant_contacts do
           if content_for_scanner =~ /Holder of domain name:\n((.+\n)+)\n/
             lines = $1.split("\n").map(&:strip)
-            
-            organization = lines[-6]
-            name = lines[-5]
-            address = lines[-4]
-            postcode = lines[-3]
-            country = lines[-2]
+
+            organization = lines[-6].force_encoding('ISO-8859-1') if lines[-5] else ""
+            name = lines[-5].force_encoding('ISO-8859-1') if lines[-4] else ""
+            address = lines[-4].force_encoding('ISO-8859-1') if lines[-3] else ""
+            postcode = lines[-3].force_encoding('ISO-8859-1') if lines[-2] else ""
+            country = lines[-2].force_encoding('ISO-8859-1') if lines[-1] else ""
 
             Record::Contact.new(
               :type => Record::Contact::TYPE_REGISTRANT,
-              :name => name.force_encoding('ISO-8859-1'),
-              :organization => organization.force_encoding('ISO-8859-1'),
-              :address => address.force_encoding('ISO-8859-1'),
-              :zip => postcode.force_encoding('ISO-8859-1'),
-              :country => country.force_encoding('ISO-8859-1')
+              :name => name,
+              :organization => organization,
+              :address => address,
+              :zip => postcode,
+              :country => country
             )
           end
         end
@@ -93,19 +93,19 @@ module Whois
           if content_for_scanner =~ /Technical contact:\n((.+\n)+)\n/
             lines = $1.split("\n").map(&:strip)
             
-            organization = lines[-5]
-            name = lines[-4]
-            address = lines[-3]
-            postcode = lines[-2]
-            country = lines[-1]
+            organization = lines[-5].force_encoding('ISO-8859-1') if lines[-5] else ""
+            name = lines[-4].force_encoding('ISO-8859-1') if lines[-4] else ""
+            address = lines[-3].force_encoding('ISO-8859-1') if lines[-3] else ""
+            postcode = lines[-2].force_encoding('ISO-8859-1') if lines[-2] else ""
+            country = lines[-1].force_encoding('ISO-8859-1') if lines[-1] else ""
 
             Record::Contact.new(
               :type => Record::Contact::TYPE_REGISTRANT,
-              :name => name.force_encoding('ISO-8859-1'),
-              :organization => organization.force_encoding('ISO-8859-1'),
-              :address => address.force_encoding('ISO-8859-1'),
-              :zip => postcode.force_encoding('ISO-8859-1'),
-              :country => country.force_encoding('ISO-8859-1')
+              :name => name,
+              :organization => organization,
+              :address => address,
+              :zip => postcode,
+              :country => country
             )
           end
         end
