@@ -127,7 +127,9 @@ module Whois
         end
 
         def parse_time(value)
-          Time.parse(value)
+          if value.length > 0
+            Time.parse(value)
+          end
         end
 
         def value_for_phone_property(element, property)
