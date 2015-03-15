@@ -34,13 +34,19 @@ module Whois
 
         property_supported :created_on do
           if content_for_scanner =~ /RegDate: (.+?)\n/
-            Time.parse($1)
+            begin
+              Time.parse($1)
+            rescue
+            end
           end
         end
 
         property_supported :updated_on do
           if content_for_scanner =~ /Updated: (.+?)\n/
-            Time.parse($1)
+            begin
+              Time.parse($1)
+            rescue
+            end
           end
         end
 
@@ -81,7 +87,7 @@ module Whois
         def value_for_property(property)
           matches = content_for_scanner.scan(/#{property}: (.+?)\n/)
           value = matches.collect(&:first)[0]
-          if value == ""
+          if value == "" || value == nil
             nil
           else
             value.strip
